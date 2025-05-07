@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Blazor Debug",
+        "type": "blazorwasm",
+        "request": "launch",
+        "url": "http://localhost:5281",
+        "browser": "edge",
+        "timeout": 60000
+      }
+    ]
+  }
