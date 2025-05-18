@@ -5,6 +5,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowClientApp",
+        policy => policy.WithOrigins("http://localhost:5281") // Your Blazor app URL
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
+});
+
 
 var app = builder.Build();
 
@@ -36,8 +44,9 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
-app.MapControllers();
 
+app.MapControllers();
+app.UseCors("AllowClientApp");
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
