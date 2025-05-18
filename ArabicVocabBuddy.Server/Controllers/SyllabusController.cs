@@ -1,4 +1,4 @@
-using ArabicVocabBuddy.Server.Models;
+using ArabicVocabBuddy.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -21,28 +21,24 @@ public class SyllabusController : ControllerBase
                     new VocabularyItem("اَلْمَدينة هُناك", "The city is there."),
                     new VocabularyItem("هُناك مَحْفَظة في شَنْطَتي", "There is a wallet in my bag."),
                     new VocabularyItem("هُناك كِتاب جَديد", "There is a new book."),
-                    ])
-                ]),
-                new Section(2, [
-                new Unit(5, [
+                    ]),
+                    new Unit(5, [
                     new VocabularyItem("حاسوب", "computer"),
                     new VocabularyItem("كُرْسي", "chair"),
                     new VocabularyItem("هٰذا كُرْسي.", "This is a chair.")
-                    ])
-                ]),new Section(2, [
-                new Unit(6, [
+                    ]),
+                    new Unit(6, [
                     new VocabularyItem("موزة", "banana"),
                     new VocabularyItem("هٰذِهِ موزة.", "This is a banana."),
                     new VocabularyItem("حَليب", "milk")
-                    ])
-                ]),
-                new Section(2, [
-                new Unit(7, [
+                    ]),
+                    new Unit(7, [
                     new VocabularyItem("صَديقهُ بوب", "his friend Bob"),
                     new VocabularyItem("أَبي وَصَديقهُ عُمَر", "my father and his friend Omar"),
                     new VocabularyItem("صَديقها جورْج", "her friend George"),
                     ])
                 ])
-        ]));
+                ])
+                );
     }
 }
