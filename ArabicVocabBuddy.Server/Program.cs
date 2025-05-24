@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +17,9 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+app.UseBlazorFrameworkFiles(); // Allows the API to host a Blazor app
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -47,6 +52,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapControllers();
 app.UseCors("AllowClientApp");
+app.MapFallbackToFile("index.html"); // Makes sure if it gets an unmapped URL, it just returns the client app
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
