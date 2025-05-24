@@ -1,18 +1,22 @@
 ﻿@page "/"
-@inject HttpClient Http
 @using ArabicVocabBuddy.Models
+@inject HttpClient Http
+@inject IEnvironmentManager EnvironmentManager
 
 <PageTitle>Arabic Vocab Buddy</PageTitle>
 
 <h1>Arabic Vocab Buddy</h1>
 
+<h2>The environment is @(EnvironmentManager.EnvironmentName).</h2>
+<h2>The API base URL is @(EnvironmentManager.ApiBaseUrl).</h2>
+
 @if (syllabus == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Loading from @(Http.BaseAddress)...</em></p>
 }
 else
 {
-    @foreach (var mySection in syllabus?.Sections)
+    @foreach (var mySection in syllabus.Sections)
     {
         <div>
             <h2>Section @mySection.Number</h2>
@@ -39,6 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        syllabus = await Http.GetFromJsonAsync<Syllabus?>("http://localhost:5025/api/Syllabus");
+        Http.BaseAddress = new Uri(EnvironmentManager.ApiBaseUrl);
+        syllabus = await Http.GetFromJsonAsync<Syllabus?>("Syllabus");
     }
 }
