@@ -24,5 +24,5 @@ cd ..
 
 # Deploy the published files
 ```
-az webapp deploy --resource-group rg-arabic-vocab-buddy --name app-arabic-vocab-buddy --src-path ./publish
+az webapp deploy --resource-group rg-arabic-vocab-buddy --name app-arabic-vocab-buddy --src-path ./publish.zip
 ```
