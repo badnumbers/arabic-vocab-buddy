@@ -2,6 +2,7 @@
 @using ArabicVocabBuddy.Models
 @inject HttpClient Http
 @inject IEnvironmentManager EnvironmentManager
+@inject IJSRuntime JsRuntime
 
 <PageTitle>Arabic Vocab Buddy</PageTitle>
 
@@ -44,21 +45,30 @@ else
 @code {
     private Syllabus? syllabus;
 
-    private void DownloadAndPlay(string text)
+    private async Task DownloadAndPlay(string text)
     {
         Console.WriteLine($"Downloading and playing: {text}");
+        bool isPwaInstalled = await IsPwaInstalled();
+        if (isPwaInstalled)
+        {
+            Console.WriteLine("PWA is installed.");
+        }
+        else
+        {
+            Console.WriteLine("PWA is not installed.");
+        }
         /*if (IsPwaInstalled() && FileSystemApiAvailable())
         {
-            if (await FileExistsOnDisk(fileName))
-            {
-                PlayFromDisk(fileName);
-                return;
-            }
+        if (await FileExistsOnDisk(fileName))
+        {
+        PlayFromDisk(fileName);
+        return;
+        }
         }
         else if (await FileExistsInCache(fileName))
         {
-            PlayFromCache(fileName);
-            return;
+        PlayFromCache(fileName);
+        return;
         }
 
         // Download file
@@ -66,14 +76,19 @@ else
 
         if (IsPwaInstalled() && FileSystemApiAvailable())
         {
-            await SaveFileToDisk(fileName, fileBytes);
-            PlayFromDisk(fileName);
+        await SaveFileToDisk(fileName, fileBytes);
+        PlayFromDisk(fileName);
         }
         else
         {
-            await SaveFileToCache(fileName, fileBytes);
-            PlayFromCache(fileName);
+        await SaveFileToCache(fileName, fileBytes);
+        PlayFromCache(fileName);
         }*/
+    }
+
+    private async Task<bool> IsPwaInstalled()
+    {
+        return await JsRuntime.InvokeAsync<bool>("isPwaInstalled");
     }
 
     protected override async Task OnInitializedAsync()
