@@ -29,7 +29,10 @@ else
                     <table>
                         @foreach (var vocabularyItem in @unit.Vocabulary)
                         {
-                            <tr><td>@vocabularyItem.Arabic</td><td>@vocabularyItem.English</td></tr>
+                            <tr>
+                                <td><button @onclick="() => DownloadAndPlay(vocabularyItem.Arabic)">@vocabularyItem.Arabic</button></td>
+                                <td>@vocabularyItem.English</td>
+                            </tr>
                         }
                     </table>
                 </div>
@@ -40,6 +43,38 @@ else
 
 @code {
     private Syllabus? syllabus;
+
+    private void DownloadAndPlay(string text)
+    {
+        Console.WriteLine($"Downloading and playing: {text}");
+        /*if (IsPwaInstalled() && FileSystemApiAvailable())
+        {
+            if (await FileExistsOnDisk(fileName))
+            {
+                PlayFromDisk(fileName);
+                return;
+            }
+        }
+        else if (await FileExistsInCache(fileName))
+        {
+            PlayFromCache(fileName);
+            return;
+        }
+
+        // Download file
+        var fileBytes = await DownloadFile(fileUrl);
+
+        if (IsPwaInstalled() && FileSystemApiAvailable())
+        {
+            await SaveFileToDisk(fileName, fileBytes);
+            PlayFromDisk(fileName);
+        }
+        else
+        {
+            await SaveFileToCache(fileName, fileBytes);
+            PlayFromCache(fileName);
+        }*/
+    }
 
     protected override async Task OnInitializedAsync()
     {
