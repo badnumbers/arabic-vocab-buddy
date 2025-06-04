@@ -12,6 +12,7 @@ az --version
 From within the directory `ArabicVocabBuddy.Server`:
 
 ```
+rm -rf publish
 dotnet publish ArabicVocabBuddy.Server.csproj -c Release -o ./publish
 ```
 
