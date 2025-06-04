@@ -93,10 +93,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        if (Http.BaseAddress != new Uri("http://localhost:5025/api/"))
-        {
-            throw new InvalidOperationException("The HttpClient base address is not set to the expected API URL.");
-        }
         syllabus = await Http.GetFromJsonAsync<Syllabus?>("Syllabus");
     }
 }
